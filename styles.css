@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Libre+Caslon+Text&family=Montserrat:wght@500;600&display=swap");
+
+:root {
+    --brown: #daaa63;
+    --light-beige: #f0e9e0;
+    --green: rgb(43, 56, 48);
+    --font-color: #2c1810;
+    --white: white;
+    --beige: rgb(254, 247, 203);
+    --blue: rgb(79, 97, 127);
+    --serif: "Libre Caslon Text";
+    --sans: "Montserrat";
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    font-family: var(--serif);
+    color: var(--font-color);
+    background-color: var(--white);
+    padding: 0 10%;
+}
+
+header {
+    background-color: var(--brown);
+    height: 6rem;
+    border-radius: 0 0 2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    z-index: 2;
+}
+
+button {
+    font-family: var(--sans);
+    background-color: var(--white);
+    padding: 1rem;
+    border: 0;
+    border-radius: 1rem;
+    font-weight: 600;
+}
+
+main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    background-color: var(--light-beige);
+    height: 100%;
+    align-content: start;
+    /* overflow: auto; */
+}
+
+.card {
+    background-color: var(--white);
+    height: 8rem;
+    border-radius: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 80%;
+    background-color: var(--white);
+    padding: 1rem;
+    text-align: center;
+}

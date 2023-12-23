@@ -1,1 +1,3 @@
 # library-app
+
+Inspired by the yet simple but really clean design made by ...

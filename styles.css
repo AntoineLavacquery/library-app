@@ -2,7 +2,9 @@
 
 :root {
     --brown: #daaa63;
+    /* --brown: #d3b07d; */
     --light-beige: #f0e9e0;
+    /* --light-beige: #f8f3eb; */
     --green: rgb(43, 56, 48);
     --font-color: #2c1810;
     --white: white;
@@ -10,6 +12,7 @@
     --blue: rgb(79, 97, 127);
     --serif: "Libre Caslon Text";
     --sans: "Montserrat";
+    --body-color: #f4e4d0;
 }
 
 * {
@@ -23,8 +26,7 @@ body {
     color: var(--font-color);
     background-color: var(--white);
     padding: 0 10%;
-    /* display: flex;
-    flex-direction: column; */
+    /* background-color: var(--body-color); */
 }
 
 header {
@@ -47,7 +49,7 @@ button {
     padding: 1rem;
     font-size: 1rem;
     border: 0;
-    border-radius: 1rem;
+    border-radius: 2rem;
     font-weight: 600;
 }
 
@@ -93,4 +95,32 @@ footer {
 footer a {
     color: var(--font-color);
     margin-right: 0.5rem;
+}
+
+dialog {
+    border: 0;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+input {
+    background-color: var(--light-beige);
+    border: 0;
+    border-radius: 1rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+div.read {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+dialog button {
+    background-color: var(--light-beige);
 }

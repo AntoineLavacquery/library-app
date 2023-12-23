@@ -10,7 +10,7 @@
 <body>
     <header>
         <h1>Library</h1>
-        <button>Add book</button>
+        <button class="addMenu">Add book</button>
     </header>
     <main>
         <div class="card">
@@ -49,6 +49,19 @@
         <a href="https://github.com/AntoineLavacquery/rock-paper-scissors"><i class="fa fa-github"></i></a>
         AntoineLavacquery
     </footer>
+
+    <dialog>
+        <h2>Add new book</h2>
+        <input name="title" type="text" placeholder="Title">
+        <input name="author" type="text" placeholder="Author">
+        <input name="pages" type="number" placeholder="Pages">
+        <div class="read">
+            <label for="read">Finished?</label>
+            <input name="read" type="checkbox">
+        </div>
+        <button class="add">Add book</button>
+        <button class="close">Close</button>
+    </dialog>
 
     <script src="script.js"></script>
 </body>

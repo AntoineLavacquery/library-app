@@ -1,13 +1,15 @@
-// Data Structures
+// User Interface
+const booksGrid = document.querySelector("main.books-grid");
+const addDialog = document.querySelector("dialog");
+const addMenuButton = document.querySelector("button.addMenu");
+const confirmAddButton = document.querySelector("button.add");
+const titleInput = document.querySelector("input[name=title]");
+const authorInput = document.querySelector("input[name=author]");
+const pagesInput = document.querySelector("input[name=pages]");
+const isReadCheckbox = document.querySelector("input[name=isRead]");
+const delButton = document.querySelector("button.del");
 
-const myLibrary = [
-    {
-        title: "Wind, Sand and Stars",
-        author: "Antoine de Saint-Exupéry",
-        pages: "224",
-        isRead: true,
-    },
-];
+// Data Structures
 
 class Book {
     constructor(
@@ -23,22 +25,44 @@ class Book {
     }
 }
 
+class Library {
+    constructor() {
+        this.books = [
+            {
+                title: "Wind, Sand and Stars",
+                author: "Antoine de Saint-Exupéry",
+                pages: "224",
+                isRead: true,
+            },
+        ];
+    }
+
+    addBook(newBook) {
+        this.books.push(newBook);
+    }
+
+    removeBook(bookTitle) {
+        this.books = this.books.filter((book) => book.title !== bookTitle)
+    }
+}
+
+// const myLibrary = [
+//     {
+//         title: "Wind, Sand and Stars",
+//         author: "Antoine de Saint-Exupéry",
+//         pages: "224",
+//         isRead: true,
+//     },
+// ];
+
+const myLibrary = new Library();
 displayBooks();
 
-// User Interface
-
-const booksGrid = document.querySelector("main.books-grid");
-const addDialog = document.querySelector("dialog");
-const addMenuButton = document.querySelector("button.addMenu");
-const confirmAddButton = document.querySelector("button.add");
-const titleInput = document.querySelector("input[name=title]");
-const authorInput = document.querySelector("input[name=author]");
-const pagesInput = document.querySelector("input[name=pages]");
-const isReadCheckbox = document.querySelector("input[name=isRead]");
+// Functions
 
 function displayBooks() {
     booksGrid.innerHTML = "";
-    for (const bookData of myLibrary) {
+    for (const bookData of myLibrary.books) {
         booksGrid.appendChild(
             generateBookCard(bookData.title, bookData.author, bookData.pages)
         );
@@ -52,9 +76,9 @@ addMenuButton.addEventListener("click", () => {
 confirmAddButton.addEventListener("click", (event) => {
     event.preventDefault();
     const bookData = new Book(
-        titleInput.value,
-        authorInput.value,
-        pagesInput.value,
+        titleInput.value.trim() || undefined,
+        authorInput.value.trim() || undefined,
+        pagesInput.value.trim() || undefined,
         isReadCheckbox.checked
     );
     addDialog.close(JSON.stringify(bookData));
@@ -67,7 +91,7 @@ addDialog.addEventListener("close", (e) => {
         const bookData = JSON.parse(addDialog.returnValue);
 
         if (bookData && typeof bookData === "object") {
-            myLibrary.push(bookData);
+            myLibrary.addBook(bookData);
         }
     } catch (error) {
         console.error("Error when analysing JSON :", error);
@@ -94,7 +118,7 @@ function generateBookCard(title, author, pages) {
     pagesSpan.innerText = pages;
 
     const isReadButton = document.createElement("button");
-    isReadButton.classList.add("read");
+    isReadButton.classList.add("isRead");
     isReadButton.innerText = "Read";
 
     const deleteButton = document.createElement("button");
@@ -109,6 +133,19 @@ function generateBookCard(title, author, pages) {
 
     return bookCard;
 }
+
+booksGrid.addEventListener("click", function (event) {
+    if (event.target.classList.contains("del")) {
+        var card = event.target.closest(".card");
+
+        if (card) {
+            var bookTitle = card.querySelector(".title").textContent;
+
+            myLibrary.removeBook(bookTitle);
+            displayBooks();
+        }
+    }
+});
 
 // Local Storage
 // Auth

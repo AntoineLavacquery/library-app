@@ -1,43 +1,49 @@
-const booksGrid = document.querySelector("main.books-grid");
+// Data Structures
 
-const addDialog = document.querySelector("dialog");
-const addMenuButton = document.querySelector("button.addMenu");
-const confirmAddButton = document.querySelector("button.add");
-// const closeButton = document.querySelector("button.close");
+const myLibrary = [
+    {
+        title: "Wind, Sand and Stars",
+        author: "Antoine de Saint-Exupéry",
+        pages: "224",
+        isRead: true,
+    },
+];
 
-const titleInput = document.querySelector("input[name=title]");
-const authorInput = document.querySelector("input[name=author]");
-const pagesInput = document.querySelector("input[name=pages]");
-const readCheckbox = document.querySelector("input[name=read]");
-
-
-const myLibrary = [];
-
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-}
-
-const firstBook = new Book(
-    "Terre des hommes",
-    "Antoine de Saint-Exupéry",
-    224
-)
-
-booksGrid.innerHTML = "";
-booksGrid.appendChild(generateBookCard("Wind, Sand and Stars", "Antoine de Saint-Exupéry", 224));
-
-function displayBooks() {
-    booksGrid.innerHTML = "";
-    booksGrid.appendChild(generateBookCard("Wind, Sand and Stars", "Antoine de Saint-Exupéry", 224));
-
-    for (const bookData of myLibrary) {
-        booksGrid.appendChild(generateBookCard(bookData.title, bookData.author, bookData.pages));
+class Book {
+    constructor(
+        title = "Unknown",
+        author = "Unknown",
+        pages = "0",
+        isRead = false
+    ) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = isRead;
     }
 }
 
+displayBooks();
+
+// User Interface
+
+const booksGrid = document.querySelector("main.books-grid");
+const addDialog = document.querySelector("dialog");
+const addMenuButton = document.querySelector("button.addMenu");
+const confirmAddButton = document.querySelector("button.add");
+const titleInput = document.querySelector("input[name=title]");
+const authorInput = document.querySelector("input[name=author]");
+const pagesInput = document.querySelector("input[name=pages]");
+const isReadCheckbox = document.querySelector("input[name=isRead]");
+
+function displayBooks() {
+    booksGrid.innerHTML = "";
+    for (const bookData of myLibrary) {
+        booksGrid.appendChild(
+            generateBookCard(bookData.title, bookData.author, bookData.pages)
+        );
+    }
+}
 
 addMenuButton.addEventListener("click", () => {
     addDialog.showModal();
@@ -49,7 +55,7 @@ confirmAddButton.addEventListener("click", (event) => {
         titleInput.value,
         authorInput.value,
         pagesInput.value,
-        readCheckbox.checked
+        isReadCheckbox.checked
     );
     addDialog.close(JSON.stringify(bookData));
 });
@@ -62,10 +68,6 @@ addDialog.addEventListener("close", (e) => {
 
         if (bookData && typeof bookData === "object") {
             myLibrary.push(bookData);
-            // console.log(bookData.title);
-            // console.log(bookData.author);
-            // console.log(bookData.pages);
-            // generateBookCard(bookData.title, bookData.author, bookData.pages);
         }
     } catch (error) {
         console.error("Error when analysing JSON :", error);
@@ -91,20 +93,24 @@ function generateBookCard(title, author, pages) {
     pagesSpan.classList.add("pages");
     pagesSpan.innerText = pages;
 
-    const readButton = document.createElement("button");
-    readButton.classList.add("read");
-    readButton.innerText = "Read";
+    const isReadButton = document.createElement("button");
+    isReadButton.classList.add("read");
+    isReadButton.innerText = "Read";
 
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("del");
     deleteButton.innerText = "Delete";
 
-    // Ajouter les éléments au div de la carte
     bookCard.appendChild(titleSpan);
     bookCard.appendChild(authorSpan);
     bookCard.appendChild(pagesSpan);
-    bookCard.appendChild(readButton);
+    bookCard.appendChild(isReadButton);
     bookCard.appendChild(deleteButton);
 
     return bookCard;
 }
+
+// Local Storage
+// Auth
+// Firestore
+// Utils

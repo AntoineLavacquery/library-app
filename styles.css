@@ -140,3 +140,7 @@ button.del {
     background-color: rgb(212, 125, 125);
     align-self: center;
 }
+
+span.title {
+    font-style: italic;
+}

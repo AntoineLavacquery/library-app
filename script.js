@@ -38,14 +38,6 @@ class Library {
     }
 
     addBook(newBook) {
-        if (!this.books.includes(newBook)) {
-            this.books.push(newBook);
-        } else {
-            alert("The book is already present");
-        }
-    }
-
-    addBook(newBook) {
         const bookExists = this.books.some(
             (book) =>
                 book.title === newBook.title && book.author === newBook.author
@@ -71,10 +63,10 @@ class Library {
     }
 
     removeBook(bookTitle, bookAuthor, bookPages, bookIsRead) {
-        console.log(bookIsRead);
+        console.log(bookPages);
         for (let book of this.books) {
-            console.log(book.isRead);
-            console.log(book.isRead !== bookIsRead);
+            console.log(book.pages);
+            console.log(book.pages === bookPages);
         }
         this.books = this.books.filter(
             (book) =>
@@ -148,9 +140,15 @@ function generateBookCard(title, author, pages, isRead) {
     authorSpan.classList.add("author");
     authorSpan.innerText = author;
 
+    const pagesDisplay = document.createElement("div");
+    const numSpan = document.createElement("span");
+    numSpan.classList.add("pages");
+    numSpan.innerText = pages;
     const pagesSpan = document.createElement("span");
-    pagesSpan.classList.add("pages");
-    pagesSpan.innerText = `${pages} pages`;
+    pagesSpan.innerText = " pages";
+    pagesDisplay.appendChild(numSpan);
+    pagesDisplay.appendChild(pagesSpan);
+
 
     const isReadContainer = document.createElement("div");
     isReadContainer.classList.add("isRead")
@@ -174,7 +172,7 @@ function generateBookCard(title, author, pages, isRead) {
 
     bookCard.appendChild(titleSpan);
     bookCard.appendChild(authorSpan);
-    bookCard.appendChild(pagesSpan);
+    bookCard.appendChild(pagesDisplay);
     bookCard.appendChild(isReadContainer);
     bookCard.appendChild(deleteButton);
 

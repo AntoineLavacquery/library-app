@@ -1,3 +1,3 @@
-# library-app
+# Library-app
 
-Inspired by the yet simple but really clean design made by ...
+[Library app](https://antoinelavacquery.github.io/library-app/) page created with HTML, CSS and JS.
